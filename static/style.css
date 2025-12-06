@@ -1,0 +1,163 @@
+/* Grundlayout */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #f4f4f7;
+    color: #222;
+}
+
+/* Container: zentrierte Seite */
+.container {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 1.5rem 2rem;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+/* Header + Navigation */
+header {
+    background: #111827;
+    color: #f9fafb;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.4rem;
+}
+
+nav a {
+    color: #e5e7eb;
+    text-decoration: none;
+    margin-left: 1rem;
+    font-size: 0.95rem;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* Überschriften im Content */
+main h2 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+/* Links im Inhalt */
+main a {
+    color: #2563eb;
+    text-decoration: none;
+}
+
+main a:hover {
+    text-decoration: underline;
+}
+
+/* Listen */
+ul {
+    padding-left: 1.25rem;
+}
+
+/* Tabellen für Filme / User */
+.table-wrapper {
+    margin-top: 1rem;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0.5rem;
+    font-size: 0.95rem;
+}
+
+th, td {
+    padding: 0.6rem 0.8rem;
+    border-bottom: 1px solid #e5e7eb;
+    text-align: left;
+}
+
+th {
+    background: #f3f4f6;
+    font-weight: 600;
+}
+
+tr:nth-child(even) {
+    background: #f9fafb;
+}
+
+/* Leere-Zustände */
+.empty-state {
+    padding: 1rem;
+    background: #fef3c7;
+    border-radius: 8px;
+    border: 1px solid #fde68a;
+    font-size: 0.95rem;
+}
+
+/* Kleine Badges (z.B. Rating) */
+.badge {
+    display: inline-block;
+    padding: 0.15rem 0.5rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    background: #e5e7eb;
+}
+.badge--rating {
+    background: #d1fae5;
+}
+
+/* Footer optional */
+footer {
+    text-align: center;
+    font-size: 0.8rem;
+    color: #6b7280;
+    padding: 1rem 0 2rem;
+}
+.poster-img {
+    width: 80px;
+    height: auto;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+.movie-form input[type="text"] {
+    padding: 0.5rem 0.7rem;
+    margin-right: 0.5rem;
+    width: 250px;
+}
+
+.movie-form button {
+    padding: 0.5rem 1rem;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.movie-form button:hover {
+    background: #1d4ed8;
+}
+.user-form input {
+    padding: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+.user-form button {
+    padding: 0.5rem 1rem;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.user-form button:hover {
+    background: #1d4ed8;
+}

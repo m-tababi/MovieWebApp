@@ -3,7 +3,6 @@ from dotenv import load_dotenv
 import requests
 import os
 
-from projects.sqlite.flask.setup import session
 
 load_dotenv()
 OMDB_API_KEY = os.getenv("OMDB_API_KEY")
@@ -17,7 +16,7 @@ class DataManager:
         db.session.commit()
         return new_user
 
-    def add_movie(self,title):
+    def add_movie(self, title: str, user_id: int):
         if not OMDB_API_KEY:
             print("NO OMDB_API_KEY")
             return None
@@ -47,7 +46,7 @@ class DataManager:
         poster = data.get("Poster")
         if not poster or poster == "N/A":
             poster = None
-        new_movie = Movie(title=data.get("Title") or title, year=year, rating= rating, poster=poster)
+        new_movie = Movie(title=data.get("Title") or title, year=year, rating= rating, poster=poster, user_id=user_id)
         db.session.add(new_movie)
         db.session.commit()
         return new_movie
@@ -62,9 +61,14 @@ class DataManager:
         return Movie.query.filter_by(user_id=user_id).all()
 
     def update_movie(self, movie_id, new_title):
-        movie_to_update = Movie.query.filter(Movie.movie_id==movie_id)
+        movie_to_update = Movie.query.get(movie_id)
+
+        if movie_to_update is None:
+            return False
+
         movie_to_update.title = new_title
         db.session.commit()
+        return True
 
     def delete_movie(self, movie_id):
         movie_to_delete = Movie.query.get(movie_id)
@@ -74,3 +78,4 @@ class DataManager:
 
         db.session.delete(movie_to_delete)
         db.session.commit()
+        return True

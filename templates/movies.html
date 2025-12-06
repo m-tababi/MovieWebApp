@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    {% if user %}
+        <h2>Filme von {{ user.name }}</h2>
+
+        <h3>Film hinzufügen</h3>
+        <form action="{{ url_for('add_movie', user_id=user.user_id) }}" method="post" class="movie-form">
+            <input type="text" name="title" placeholder="Filmtitel eingeben" required>
+            <button type="submit">Hinzufügen</button>
+        </form>
+        <hr>
+    {% else %}
+        <h2>Alle Filme</h2>
+    {% endif %}
+
+    {% if movies %}
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Titel</th>
+                        <th>Jahr</th>
+                        <th>Rating</th>
+                        <th>Poster</th>
+                        <th>User-ID</th>
+                        {% if user %}
+                            <th>Aktionen</th>
+                        {% endif %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for movie in movies %}
+                        <tr>
+                            <td>{{ movie.movie_id }}</td>
+                            <td>{{ movie.title }}</td>
+                            <td>{{ movie.year }}</td>
+                            <td>
+                                {% if movie.rating %}
+                                    <span class="badge badge--rating">
+                                        {{ movie.rating }}
+                                    </span>
+                                {% else %}
+                                    –
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if movie.poster %}
+                                    <a href="{{ movie.poster }}" target="_blank">
+                                        <img src="{{ movie.poster }}"
+                                             alt="{{ movie.title }} Poster"
+                                             class="poster-img">
+                                    </a>
+                                {% else %}
+                                    Kein Bild
+                                {% endif %}
+                            </td>
+                            <td>{{ movie.user_id }}</td>
+
+                            {% if user %}
+                                <td>
+                                    {# Titel aktualisieren #}
+                                    <form action="{{ url_for('update_movie', user_id=user.user_id, movie_id=movie.movie_id) }}"
+                                          method="post"
+                                          class="inline-form">
+                                        <input type="text" name="title" placeholder="Neuer Titel">
+                                        <button type="submit">Update</button>
+                                    </form>
+
+                                    {# Film löschen #}
+                                    <form action="{{ url_for('delete_movie', user_id=user.user_id, movie_id=movie.movie_id) }}"
+                                          method="post"
+                                          class="inline-form"
+                                          onsubmit="return confirm('Diesen Film wirklich löschen?');">
+                                        <button type="submit">Löschen</button>
+                                    </form>
+                                </td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="empty-state">
+            Es sind noch keine Filme in der Datenbank vorhanden.
+        </div>
+    {% endif %}
+
+{% endblock %}
