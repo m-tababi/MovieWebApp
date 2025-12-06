@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Interner Serverfehler</h2>
+    <p>Entschuldigung, es ist ein unerwarteter Fehler aufgetreten.</p>
+    <p>
+        Bitte versuche es später erneut oder kehre zur 
+        <a href="{{ url_for('index') }}">Startseite</a> zurück.
+    </p>
+{% endblock %}

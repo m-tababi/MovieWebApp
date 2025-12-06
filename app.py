@@ -48,7 +48,7 @@ def create_user():
     Creates a new user.
     Reads the value from the form field 'name'.
     """
-    name = request.form.get("name").strip()
+    name = (request.form.get("name") or "").strip()
 
     if not name:
         flash("Bitte gib einen Namen ein.", "error")
